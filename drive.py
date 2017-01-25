@@ -16,6 +16,7 @@ from keras.models import model_from_json
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array
 
 import cv2
+from proc_data import preprocess_image
 
 # Fix error with Keras and TensorFlow
 import tensorflow as tf
@@ -44,6 +45,7 @@ def telemetry(sid, data):
     image_array = cv2.cvtColor(image_array, code=cv2.COLOR_RGB2BGR)
     
     # prepare image for model
+    image_array = preprocess_image(brg=image_array)
     
     transformed_image_array = image_array[None, :, :, :]
     # This model currently assumes that the features of the model are just the images. Feel free to change this.
